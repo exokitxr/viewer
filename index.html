@@ -356,8 +356,45 @@ header > .login-form.phase-3 > .phaseless-content
 import ew from 'https://web2.exokit.org/ew.js';
 // import ew from './exokit-web/ew.js';
 
+function parseQuery(queryString) {
+  var query = {};
+  var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split('=');
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+}
+
 (async () => {
   await ew.register();
+
+  const q = parseQuery(window.location.search);
+  if (q.p) {
+    const xrEngine = new XREngine();
+    xrEngine.src = q.p;
+    /* xrEngine.addEventListener('message', async e => {
+      const {data} = e;
+      const {method} = data;
+    }); */
+    const iframeWrapper = document.getElementById('iframe-wrapper');
+    iframeWrapper.appendChild(xrEngine);
+
+    xrEngine.addEventListener('canvas', e => {
+      // const canvas = e.data;
+
+      [
+        'enter-xr-button',
+      ].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('click', async () => {
+          await xrEngine.enterXr();
+        });
+      });
+    });
+  } else {
+    document.getElementById('iframe-wrapper').innerHTML = `<h1>Not found</h1>`;
+  }
 })();
     </script>
   </body>
