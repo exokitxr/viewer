@@ -2,7 +2,7 @@
 <html>
   <body>
     <script>
-console.log('404 page', window.location.href);
+      window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(window.location.pathname);
     </script>
   </body>
 </html>
