@@ -304,10 +304,6 @@ header > .login-form.phase-3 > .phaseless-content
   padding: 0 30px;
 }
     </style>
-    <script src="three.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script src="Reflector.js"></script>
-    <script src="bmfont.js"></script>
   </head>
   <body>
     <div class=body>
@@ -349,29 +345,6 @@ header > .login-form.phase-3 > .phaseless-content
         </form>
       </header>
 
-      <div class=examples>
-        <h3>Examples</h3>
-        <p class=avatar-models id=avatar-models></p>
-        <div class=multibutton>
-          <label for="upload-file-button">
-            <a class="button first last">Upload file...</a>
-            <input type="file" id="upload-file-button" style="display: none">
-          </label>
-        </div>
-        <div class=multibutton>
-          <nav class="button first last" id=export-model-button>Export model</nav>
-        </div>
-        <div class=multibutton>
-          <nav class="button first" id=scale-down-button>Scale -</nav>
-          <nav class="button last" id=scale-up-button>Scale +</nav>
-        </div>
-        <h3>Multiplayer</h3>
-        <input type=text value="avaer/yatis" placeholder="user/channel" id=channel-input>
-        <div class=multibutton>
-          <nav class="button first last" id=connect-button>Connect</nav>
-        </div>
-      </div>
-
       <div class=iframe-wrapper id=iframe-wrapper></div>
 
       <div class=multibutton>
@@ -384,10 +357,12 @@ header > .login-form.phase-3 > .phaseless-content
       </div>
     </div>
     <script type=module>
-// import './webxr-polyfill.module.js';
-// import './HelioWebXRPolyfill.js';
+import ew from 'https://web2.exokit.org/ew.js';
+// import ew from './exokit-web/ew.js';
 
-
+(async () => {
+  await ew.register();
+})();
     </script>
   </body>
 </html>
