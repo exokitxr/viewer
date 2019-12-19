@@ -2,7 +2,15 @@
 <html>
   <body>
     <script>
-      window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(window.location.pathname);
+(async () => {
+  const res = await fetch(`https://content.exokit.org/hash${window.location.pathname}`);
+  if (res.ok) {
+    const redirectLocation = res.headers.get('x-amz-website-redirect-location');
+    window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation);
+  } else {
+    document.body.innerHTML = `<h1>Not found: ${escape(window.location.pathname)}</h1>`;
+  }
+})();
     </script>
   </body>
 </html>
