@@ -8,7 +8,13 @@
     const j = res.json();
     const redirectLocation = j.location;
     // console.log('redirecting', redirectLocation, window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation));
-    window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation);
+    if (redirectLocation) {
+      window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation);
+    } else {
+      const h1 = document.createElement('h1');
+      h1.innerText = `Not found: ${escape(window.location.pathname)} ${JSON.stringify(j)}`;
+      document.body.appendChild(h1);
+    }
   } else {
     const h1 = document.createElement('h1');
     h1.innerText = `Not found: ${escape(window.location.pathname)}`;
