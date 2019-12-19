@@ -5,7 +5,7 @@
 (async () => {
   const res = await fetch(`https://content.exokit.org/filename${window.location.pathname}`);
   if (res.ok) {
-    const j = res.json;
+    const j = res.json();
     const redirectLocation = j.location;
     // console.log('redirecting', redirectLocation, window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation));
     window.location.href = window.location.protocol + '//' + window.location.host + '/?p=' + encodeURIComponent(redirectLocation);
